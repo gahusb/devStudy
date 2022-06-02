@@ -1,0 +1,26 @@
+div {
+    font-size: 100px;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: orange;
+    transition: 1s;
+}
+
+.box:hover {
+    width: 300px;
+}
+
+.box:active {
+    background-color: blue;
+}
+
+input {
+
+}
+
+input:focus {
+    background-color: orange;
+}
