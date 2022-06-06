@@ -5,25 +5,46 @@
 </body>
 <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-<script>
-    let counter = 0;
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
     const root = document.getElementById("root");
-    const Title = (
-        <h3 id="title">
-            Total click: `${counter}`
-        </h3>
-    );
-    const Button = (
-        <button
-            style={{
-                backgroundColor: "tomato",
-            }}
-            onClick={() => counter += 1}
-        >
-            Click me
-        </button>
-    );
-    const container = React.createElement("div", null, [Title, Button]);
-    ReactDOM.render(container, root);
+    function App() {
+        const [minutes, setMinutes] = React.useState();
+        const [flipped, setFlipped] = React.useState(false);
+        const onChange = (event) => {
+            setMinutes(event.target.value);
+        };
+        const reset = () => setMinutes(0);
+        const onFlip = () => setFlipped((current) => !current);
+        return (
+            <div>
+                <div>
+                    <h1>Super Converter</h1>
+                    <label htmlFor="minutes">Minutes</label>
+                    <input
+                        value={minutes}
+                        id="minutes"
+                        type="number"
+                        placeholder="Minutes"
+                        onChange={onChange}
+                        disabled={flipped === true}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="hours">Hours</label>
+                    <input
+                        value={Math.round(minutes / 60)}
+                        id="hours"
+                        type="number"
+                        placeholder="Hours"
+                        disabled={flipped === false}
+                    />
+                </div>
+                <button onClick={reset}>RESET</button>
+                <button onClick={onFlip}>Flipped</button>
+            </div>
+        );
+    }
+    ReactDOM.render(<App />, root);
 </script>
 </html>
